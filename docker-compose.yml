@@ -1,0 +1,9 @@
+services:
+  forohub:
+    image: mysql:8.0
+    container_name: forohub
+    environment:
+      MYSQL_ROOT_PASSWORD: AluraLatamForoHub
+    restart: always
+    ports:
+      - "3309:3306"
