@@ -2,9 +2,9 @@ spring:
   application:
     name: forohub
   datasource:
-      url: jdbc:mysql://127.0.0.1:3309/forohub?createDatabaseIfNotExist=true
-      username: root
-      password: AluraLatamForoHub
+      url: ${FOROHUB_DB_URL:jdbc:mysql://127.0.0.1:3309/forohub?createDatabaseIfNotExist=true}
+      username: ${FOROHUB_DB_USER:root}
+      password: ${FOROHUB_DB_PASSWORD:AluraLatamForoHub}
       driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -16,4 +16,6 @@ spring:
 
 api:
   security:
-    secret: ${JWT_SECRET:forohub-secret-dev}
+    secret: ${FOROHUB_JWT_SECRET:forohub-secret-dev}
+    hash-secret: ${FOROHUB_HASH_SECRET:forohub-hash-secret-dev}
+    bcrypt-strength: ${FOROHUB_BCRYPT_STRENGTH:10}
