@@ -32,6 +32,11 @@ public class GlobalExceptionManager {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(ex.getMessage()));
     }
 
+    @ExceptionHandler(CustomForbiddenException.class)
+    public ResponseEntity<Response> handleCustomException(CustomForbiddenException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new Response(ex.getMessage()));
+    }
+
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public ResponseEntity<Response> handleHttpRequestMethodNotSupportedException(
             HttpRequestMethodNotSupportedException ex) {

@@ -4,7 +4,78 @@
     "name": "ForoHub API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
   "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login admin",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Login user",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"123456\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          }
+        }
+      ]
+    },
     {
       "name": "Comentarios",
       "item": [
@@ -53,7 +124,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"mensaje\": \"Comentario de ejemplo\",\n  \"topic\": { \"id\": 1 },\n  \"author\": { \"id\": 1 }\n}"
+              "raw": "{\n  \"mensaje\": \"Comentario de ejemplo\",\n  \"topic_id\": 1,\n  \"autor_id\": 1\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/comentarios",
@@ -62,6 +133,32 @@
               ],
               "path": [
                 "comentarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar comentario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mensaje\": \"Comentario actualizado\",\n  \"topic_id\": 1,\n  \"autor_id\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/comentarios/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "comentarios",
+                "1"
               ]
             }
           }
@@ -147,6 +244,32 @@
           }
         },
         {
+          "name": "Actualizar curso",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreCurso\": \"Spring Boot Avanzado\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cursos/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "cursos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
           "name": "Eliminar curso",
           "request": {
             "method": "DELETE",
@@ -222,6 +345,32 @@
               ],
               "path": [
                 "topics"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Actualizar topic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Duda de JPA (actualizada)\",\n  \"mensaje\": \"Como mapear relaciones uno a muchos?\",\n  \"estatus\": true,\n  \"usuario\": { \"id\": 1 },\n  \"curso\": { \"id\": 1 }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/topics/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "topics",
+                "1"
               ]
             }
           }
@@ -307,6 +456,32 @@
           }
         },
         {
+          "name": "Actualizar usuario",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombreUsuario\": \"ivan_actualizado\",\n  \"email\": \"ivan.actualizado@example.com\",\n  \"password\": \"12345678\",\n  \"rol\": \"USER\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/usuarios/1",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "usuarios",
+                "1"
+              ]
+            }
+          }
+        },
+        {
           "name": "Eliminar usuario",
           "request": {
             "method": "DELETE",
@@ -330,6 +505,10 @@
     {
       "key": "baseUrl",
       "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
     }
   ]
 }
