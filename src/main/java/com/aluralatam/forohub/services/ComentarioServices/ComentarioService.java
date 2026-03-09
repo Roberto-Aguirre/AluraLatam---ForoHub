@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import com.aluralatam.forohub.entities.Comentario;
 import com.aluralatam.forohub.repository.ComentarioRepository;
 import com.aluralatam.forohub.services.TopicServices.TopicService;
-
+import com.aluralatam.forohub.services.UsuarioServices.UsuarioService;
+import com.aluralatam.forohub.dtos.ComentarioDtoCreate;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class ComentarioService {
 
     private final ComentarioRepository comentarioRepository;
     private final TopicService topicService;
+    private final UsuarioService usuarioService;
 
     public List<Comentario> listar(Long topicId) {
         
@@ -30,7 +32,13 @@ public class ComentarioService {
         return comentarioRepository.findById(id);
     }
 
-    public Comentario guardar(Comentario comentario) {
+    public Comentario guardar(ComentarioDtoCreate comentarioDto) {
+        Comentario comentario = Comentario.builder()
+        .mensaje(comentarioDto.mensaje())
+        .author(usuarioService.buscarPorId(comentarioDto.autorId()))
+        .topic(topicService.buscarPorId(comentarioDto.topicId()))
+        .build();
+        
         return comentarioRepository.save(comentario);
     }
 

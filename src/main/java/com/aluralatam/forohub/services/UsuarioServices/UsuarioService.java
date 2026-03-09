@@ -22,8 +22,8 @@ public class UsuarioService {
         return usuarioRepository.findAll().stream().map(UsuarioDTO::new).toList();
     }
 
-    public Optional<UsuarioDTO> buscarPorId(Long id) {
-        return usuarioRepository.findById(id).map(UsuarioDTO::new);
+    public Usuario buscarPorId(Long id) {
+        return usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
     public Optional<Usuario> buscarEntidadPorId(Long id) {

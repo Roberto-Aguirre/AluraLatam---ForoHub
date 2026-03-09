@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.aluralatam.forohub.dtos.ComentarioDto;
+import com.aluralatam.forohub.dtos.ComentarioDtoCreate;
 import com.aluralatam.forohub.entities.Comentario;
 import com.aluralatam.forohub.services.ComentarioServices.ComentarioService;
 
@@ -41,8 +42,10 @@ public class ComentarioController {
     // }
 
     @PostMapping
-    public Comentario guardar(@RequestBody Comentario comentario) {
-        return comentarioService.guardar(comentario);
+    public ComentarioDto guardar(@RequestBody ComentarioDtoCreate comentario) {
+        System.out.println(comentario);
+
+        return new ComentarioDto(comentarioService.guardar(comentario));
     }
 
     @DeleteMapping("/{id}")
