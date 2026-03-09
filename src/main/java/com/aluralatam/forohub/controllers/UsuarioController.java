@@ -32,7 +32,8 @@ public class UsuarioController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> buscarPorId(@PathVariable Long id) {
-        return usuarioService.buscarPorId(id)
+        return usuarioService.buscarEntidadPorId(id)
+                .map(UsuarioDTO::new)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

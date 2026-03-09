@@ -9,7 +9,7 @@ import com.aluralatam.forohub.entities.Comentario;
 import com.aluralatam.forohub.repository.ComentarioRepository;
 import com.aluralatam.forohub.services.TopicServices.TopicService;
 import com.aluralatam.forohub.services.UsuarioServices.UsuarioService;
-import com.aluralatam.forohub.dtos.ComentarioDtoCreate;
+import com.aluralatam.forohub.dtos.ComentarioDtoTransaccion;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -32,7 +32,7 @@ public class ComentarioService {
         return comentarioRepository.findById(id);
     }
 
-    public Comentario guardar(ComentarioDtoCreate comentarioDto) {
+    public Comentario guardar(ComentarioDtoTransaccion comentarioDto) {
         Comentario comentario = Comentario.builder()
         .mensaje(comentarioDto.mensaje())
         .author(usuarioService.buscarPorId(comentarioDto.autorId()))

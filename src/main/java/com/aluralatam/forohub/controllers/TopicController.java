@@ -37,8 +37,8 @@ public class TopicController {
     }
 
     @PostMapping
-    public Topic guardar(@RequestBody TopicDTO topic) {
-        return topicService.guardar(topic);
+    public TopicDTO guardar(@RequestBody TopicDTO topic) {
+        return topicMapperService.toDTO(topicService.guardar(topic));
     }
 
     @DeleteMapping("/{id}")

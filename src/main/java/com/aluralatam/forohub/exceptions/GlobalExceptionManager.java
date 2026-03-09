@@ -37,6 +37,10 @@ public class GlobalExceptionManager {
             HttpRequestMethodNotSupportedException ex) {
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).body(new Response("Método HTTP no permitido"));
     }
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Response> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new Response(ex.getMessage()));
+    }
     // @ExceptionHandler(NotFoundException.class)
     // public ResponseEntity<Response> handleNotFoundException(NotFoundException ex)
     // {

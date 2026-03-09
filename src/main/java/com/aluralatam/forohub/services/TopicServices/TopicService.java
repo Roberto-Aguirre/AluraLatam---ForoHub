@@ -19,7 +19,7 @@ public class TopicService {
     private final TopicRepository topicRepository;
     private final CursoService cursoService;
     private final UsuarioService usuarioService;
-
+    private final List<TopicValidation> topicValidation;
 
     public List<Topic> listar() {
         return topicRepository.findAll();
@@ -30,9 +30,11 @@ public class TopicService {
     }
 
     public Topic guardar(TopicDTO topic) {
+        topicValidation.forEach(validation -> validation.validateTopic(topic));
         Topic entity = Topic.builder()
                 .titulo(topic.titulo())
                 .mensaje(topic.mensaje())
+                .estatus(true)
                 .curso(cursoService.buscarEntidadPorId(topic.curso().id()).orElseThrow(() -> new CustomNotFoundException("Curso no encontrado")))
                 .usuario(usuarioService.buscarEntidadPorId(topic.usuario().id()).orElseThrow(() -> new CustomNotFoundException("Usuario no encontrado")))
                 .build()
